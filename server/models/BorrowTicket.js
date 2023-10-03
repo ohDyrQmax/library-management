@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const BorrowTicketSchema = new mongoose.Schema(
     {
@@ -15,6 +16,8 @@ const BorrowTicketSchema = new mongoose.Schema(
         returnDate: Date,
     }, { timestamps: true }
 );
+
+BorrowTicketSchema.plugin(mongoosePaginate);
 
 const BorrowTicket = mongoose.model("BorrowTicket", BorrowTicketSchema);
 export default BorrowTicket;

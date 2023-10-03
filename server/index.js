@@ -10,6 +10,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 import borrowerRoutes from "./routes/borrower.js";
 import employeeRoutes from "./routes/employee.js";
+import borrowTicketRoutes from "./routes/borrowTicket.js";
+import bookRoutes from "./routes/book.js";
+
+import Category from "./models/Category.js";
+import Author from "./models/Author.js";
+import Book from "./models/Book.js";
+import { authors, categories, books } from "./data/index.js";
 
 /* configurations */
 const __filename = fileURLToPath(import.meta.url);
@@ -44,6 +51,8 @@ const upload = multer({ storage });
 /* routes */
 app.use("/borrower", borrowerRoutes);
 app.use("/employee", employeeRoutes);
+app.use("/ticket", borrowTicketRoutes);
+app.use("/book", bookRoutes);
 
 /* mongoose setup */
 const PORT = process.env.PORT || 6001;
@@ -54,5 +63,10 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+    /* Add data once */
+    // Author.insertMany(authors);
+    // Category.insertMany(categories);
+    // Book.insertMany(books);
   })
   .catch((error) => console.log(`Cannot establish connection: ${error}`));

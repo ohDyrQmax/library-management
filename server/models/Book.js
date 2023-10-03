@@ -6,7 +6,7 @@ const BookSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        author: {
+        authorId: {
             type: String,
             required: true
         },
@@ -16,7 +16,7 @@ const BookSchema = new mongoose.Schema(
         },
         shelf: {
             type: String,
-            required: true
+            // required: true
         },
         quantity: {
             type: Number,
