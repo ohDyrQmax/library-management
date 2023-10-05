@@ -11,9 +11,9 @@ const BorrowTicketSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        borrowedDate: Date,
-        expectReturnDate: Date,
-        returnDate: Date,
+        borrowedDate: String,
+        expectReturnDate: String,
+        returnDate: String,
     }, { timestamps: true }
 );
 

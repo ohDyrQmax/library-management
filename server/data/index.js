@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
-
+const roleIds = [
+    new mongoose.Types.ObjectId(),
+    new mongoose.Types.ObjectId(),
+    new mongoose.Types.ObjectId(),
+];
 const authorIds  = [
     new mongoose.Types.ObjectId(),
     new mongoose.Types.ObjectId(),
@@ -24,6 +28,24 @@ const bookIds = [
     new mongoose.Types.ObjectId(),
 ];
 
+
+export const roles = [
+    {
+        __id: roleIds[0],
+        name: 'manager',
+        priority: 3
+    },
+    {
+        __id: roleIds[1],
+        name: 'employee',
+        priority: 2
+    },
+    {
+        __id: roleIds[2],
+        name: 'guess',
+        priority: 1
+    }
+];
 export const authors = [
     {
         __id: authorIds[0],

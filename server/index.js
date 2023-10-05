@@ -8,15 +8,19 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-import borrowerRoutes from "./routes/borrower.js";
-import employeeRoutes from "./routes/employee.js";
+
+import userRoutes from "./routes/user.js";
 import borrowTicketRoutes from "./routes/borrowTicket.js";
 import bookRoutes from "./routes/book.js";
+import categoryRoutes from "./routes/category.js";
+import authorRoutes from "./routes/author.js";
+import authRoutes from "./routes/auth.js";
 
+import Role from "./models/role.js";
 import Category from "./models/Category.js";
 import Author from "./models/Author.js";
 import Book from "./models/Book.js";
-import { authors, categories, books } from "./data/index.js";
+import { roles, authors, categories, books } from "./data/index.js";
 
 /* configurations */
 const __filename = fileURLToPath(import.meta.url);
@@ -26,10 +30,10 @@ dotenv.config();
 const app = express();
 
 // app.use(morgan());
-app.use(express.json);
+app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(bodyParser.json({ limit: "30mb" })); // , extended: true
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
@@ -49,10 +53,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 /* routes */
-app.use("/borrower", borrowerRoutes);
-app.use("/employee", employeeRoutes);
-app.use("/ticket", borrowTicketRoutes);
 app.use("/book", bookRoutes);
+app.use("/category", categoryRoutes);
+app.use("/author", authorRoutes);
+app.use("/user", userRoutes);
+app.use("/auth", authRoutes);
+app.use("/ticket", borrowTicketRoutes);
 
 /* mongoose setup */
 const PORT = process.env.PORT || 6001;
@@ -64,7 +70,8 @@ mongoose
   .then(() => {
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-    /* Add data once */
+    /* Add mock data once */
+    // Role.insertMany(roles);
     // Author.insertMany(authors);
     // Category.insertMany(categories);
     // Book.insertMany(books);
