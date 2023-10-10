@@ -1,0 +1,45 @@
+<div class="">
+  <label for="filter-book-title" class="text-white">Title</label>
+  <div class="pb-2 mb-2 border-bottom border-dark input-group">
+    <input placeholder="Search with filters" type="text" class="text-white form-control shadow-none bg-dark-custom px-2" id="filter-book-title" aria-describedby="search-with-filter">
+    <button class="text-white btn btn-outline-light" type="button" id="search-with-filter"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+
+  <div class="pb-2 mb-2 border-bottom border-dark">
+    <div class="text-white" data-bs-toggle="collapse" href="#collapseAuthor" role="button" aria-expanded="false"
+         aria-controls="collapseAuthor">
+      Authors
+      <i class="fa-solid fa-sort-down float-end"></i>
+    </div>
+    <ul class="list-group collapse border-0" id="collapseAuthor">
+      <li class="list-group-item bg-dark-custom text-white border-0">
+        <input type="radio" class="form-check-input me-1" name="author" value="" id="a-all">
+        <span class="mx-2">All</span>
+      </li>
+      <li class="list-group-item bg-dark-custom text-white border-0" *ngFor="let author of bookAuthors | keyvalue">
+        <input [id]="'a-'+author.key" type="radio" class="form-check-input me-1" name="author" [value]="author.key"
+               aria-label="wat">
+        <span class="mx-2">{{author.value['name']}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="pb-2 mb-2 border-bottom border-dark">
+    <div class="text-white" data-bs-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false"
+         aria-controls="collapseCategory">
+      Category
+      <i class="fa-solid fa-sort-down float-end"></i>
+    </div>
+    <ul class="list-group collapse border-0" id="collapseCategory">
+      <li class="list-group-item bg-dark-custom text-white border-0">
+        <input type="radio" class="form-check-input me-1" name="author" value="" id="c-all">
+        <span class="mx-2">All</span>
+      </li>
+      <li class="list-group-item bg-dark-custom text-white border-0" *ngFor="let category of bookCategories | keyvalue">
+        <input [id]="'c-'+category.key" type="radio" class="form-check-input me-1" name="author" [value]="category.key"
+               aria-label="wat">
+        <span class="mx-2">{{category.value['name']}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

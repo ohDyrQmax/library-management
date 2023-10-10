@@ -1,0 +1,26 @@
+
+.p-align-left {
+  text-align: left;
+}
+
+.book-body > h4 {
+  text-decoration-line: none;
+  /*font-family: 'Playfair Display', serif;*/
+  transition: .3s ease;
+}
+
+.book-body a {
+  font-family: 'Playfair Display', serif;
+}
+
+.book-body > h4:hover {
+  color: var(--bs-red);
+}
+
+.bg-dark-custom {
+  background-color: black;
+}
+
+.card-body {
+  font-size: .95rem;
+}

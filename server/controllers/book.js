@@ -1,6 +1,8 @@
 import Book from "../models/Book.js";
 import Author from "../models/Author.js";
 import Category from "../models/Category.js";
+import  keyBy  from "lodash/keyBy.js";
+
 
 /* utility */
 const addNewAuthor = async (name) => {
@@ -61,13 +63,15 @@ export const createBook = async (req, res) => {
 /* read */
 export const listBook = async (req, res) => {
     try {
-        let { author, category  } = req.query || req.body;
+        let { title, author, category } = req.query || req.body;
         let list = await Book.find({
+            title: { $regex: title || "", $options: 'i' },
             authorId: { $regex: author || "" },
             categoryId: { $regex: category || "" }
         });
+
         //.skip((item_per_page * current_page_no)-item_per_page)).limit(item_per_page)
-        return res.status(200).json(list);
+        return res.status(200).json(keyBy(list, "_id"));
     } catch (error) {
         return res.status(error.status || 500).json({ error: error.message || error });
     }
@@ -90,16 +94,16 @@ export const findBookById = async (req, res) => {
 export const updateBookById = async (req, res) => {
     try {
         let { id } = req.params || req.query;
-        let { title, author, categoryId, shelf, quantity } = req.body;
+        let { title, authorId, categoryId, shelf, quantity } = req.body;
         let book = await Book.findById(id);
         book.title = title || book.title;
-        book.author = author || book.author;
+        book.authorId = authorId || book.authorId;
         book.categoryId = categoryId || book.categoryId;
         book.shelf = shelf || book.shelf;
         book.quantity = quantity || book.quantity;
 
-        await book.save();
-        res.status(200).send("Update book success")
+        let updatedBook = await book.save();
+        res.status(200).json(updatedBook)
     } catch (error) {
         res.status(error.status || 500).json({ error: error.message || error });
     }

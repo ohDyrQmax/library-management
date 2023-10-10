@@ -1,0 +1,70 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark-custom">
+  <div class="container px-4 px-lg-5">
+    <a class="navbar-brand" href="#">Online Bookstore</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+      class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+             aria-expanded="false">Shop</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">All Products</a></li>
+            <li>
+              <hr class="dropdown-divider"/>
+            </li>
+            <li><a class="dropdown-item" href="#">Popular Items</a></li>
+            <li><a class="dropdown-item" href="#">New Arrivals</a></li>
+          </ul>
+        </li>
+      </ul>
+      <button class="btn btn-outline-light" type="submit">
+        <i class="bi-cart-fill me-1"></i>
+        Cart
+        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+<!-- Header-->
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Random template text</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Even more random template text</p>
+    </div>
+  </div>
+</header>
+
+<router-outlet></router-outlet>
+<!-- Footer-->
+<footer class="py-4 bg-dark row justify-content-center" style="margin-right: 0">
+  <div class="text-center px-5 col-8">
+    <h2 class="text-white mb-4 border-bottom" style="
+      font-family: 'Playfair Display', serif;
+       font-size: 2.611em;"
+    >Stay in touch with our updates</h2>
+
+    <div class="input-group mb-3 mt-5 shadow-none" style="">
+      <input id="get-in-touch"
+             type="text"
+             class="form-control"
+             placeholder="Enter your email address, or else..."
+             aria-label="Recipient's email"
+             aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button class="btn geInToBtn" type="button">Get in touch</button>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!--&lt;!&ndash; Bootstrap core JS&ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--&lt;!&ndash; Core theme JS&ndash;&gt;-->
+<!--<script src="js/scripts.js"></script>-->

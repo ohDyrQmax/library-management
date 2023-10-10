@@ -53,11 +53,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 /* routes */
+app.use("/auth", authRoutes);
 app.use("/book", bookRoutes);
 app.use("/category", categoryRoutes);
 app.use("/author", authorRoutes);
 app.use("/user", userRoutes);
-app.use("/auth", authRoutes);
+
 app.use("/ticket", borrowTicketRoutes);
 
 /* mongoose setup */

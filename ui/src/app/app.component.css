@@ -1,0 +1,24 @@
+.geInToBtn {
+  background-color: var(--bs-red);
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  padding: .86em;
+  transition: 0.3s ease;
+  color: white;
+  font-family: 'Playfair Display', serif;
+}
+
+.geInToBtn:hover {
+  background-color: black;
+  outline: 1px solid var(--bs-red);
+}
+
+footer input {
+  font-size: small;
+  font-family: sans-serif;
+  padding: .86em;
+}
+
+.bg-dark-custom {
+  background-color: black;
+}

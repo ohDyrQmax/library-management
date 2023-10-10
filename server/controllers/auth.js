@@ -16,11 +16,15 @@ export const userLogin = async (req, res) => {
         let isMatchPassword = await bcrypt.compare(password, user.password);
         if (!isMatchPassword) return res.status(400).json({ message: "Invalid credentials." });
 
-        let token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+        let token = jwt.sign(
+            { username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: '30m' }
+        );
 
         user.priority = role.priority;
-        delete user.password;
-        user.password = undefined; //for some reason this doesn't work
+        delete user.password; //for some reason this doesn't work
+        user.password = undefined;
 
         res.status(200).json({ user, token });
     } catch (error) {

@@ -10,15 +10,12 @@ const datetimeFormat = "MMMM Do YYYY, h:mm:ss";
 /* create */
 export const createBorrowTicket = async (req, res) => {
     try {
-        let { bookId, borrowerId } = req.body;
+        let { bookId, borrowerId, borrowedDate } = req.body;
         let selectedBook = await Book.findById(bookId);
-        if (selectedBook.quantity < 1) return res.status(400)
-            .json({message: `${selectedBook.title} is currently unavailable.`});
+        if (selectedBook.quantity < 1) return res.status(400).json({message: `${selectedBook.title} is currently unavailable.`});
 
-        let borrowedDate = moment().format(datetimeFormat);
+        borrowedDate = moment(new Date(borrowedDate)).format(datetimeFormat);
         let expectReturnDate = moment().add(defaultLimitDayCanBorrow, 'd').format(datetimeFormat);
-
-        console.log(borrowedDate, expectReturnDate);
 
         let newBorrowTicket = new BorrowTicket({
             bookId,

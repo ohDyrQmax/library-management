@@ -1,10 +1,10 @@
 import Category from "../models/Category.js";
-
+import keyBy from "lodash/keyBy.js";
 /* read */
 export const listCategory = async (req, res) => {
   try {
-    let list = await Category.find();
-    return res.status(200).json(list);
+    let list = await Category.find().sort({ name: 1 });
+    return res.status(200).json(keyBy(list, '_id'));
   } catch (error) {
     return res.status(error.status || 500).json({ error: error.message || error });
   }

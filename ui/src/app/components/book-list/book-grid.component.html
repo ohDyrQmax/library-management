@@ -1,0 +1,31 @@
+<div class="row px-lg-5 bg-dark-custom" style="
+margin-right: 0;
+">
+  <section class="py-3 col-md-3">
+    <app-book-category [bookAuthors]="Authors" [bookCategories]="Categories"></app-book-category>
+  </section>
+  <section class="py-3 col-md-9">
+    <div class="container px-4 px-lg-2">
+
+      <div class="row gx-4 gx-lg-5  justify-content-center ">
+        <div class=" mb-3" *ngFor="let book of Books | keyvalue">
+          <div class="card bg-dark-custom border border-dark h-100">
+            <!-- <img class="card-img-top img-responsive" src="{{book.imageUrl}}" alt="..." height="250" width="100"/>-->
+
+            <div class="card-body text-white book-body p-2">
+              <h4 class="fw-bolder">{{book.value.title}}</h4>
+              <a>By <i>{{Authors[book.value.authorId]["name"]}}</i></a><br>
+              <a>Category: {{Categories[book.value.categoryId]["name"]}}</a><br>
+              <a>Quantity: {{book.value.quantity}}</a>
+              <button class="btn btn-outline-light float-end">
+                Borrow
+              </button>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

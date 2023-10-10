@@ -25,6 +25,7 @@ const BorrowerSchema = new mongoose.Schema(
             min: 3,
             max: 50
         },
+        refreshToken: String
     }, { timestamps: true }
 );
 

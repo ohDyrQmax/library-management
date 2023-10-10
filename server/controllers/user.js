@@ -12,7 +12,7 @@ export const createUser = async (req, res) => {
         } = req.body;
 
         let user = await User.findOne({ username: username });
-        if (user) return res.status(400).json({ error: "Username taken" });
+        if (user) return res.status(409).json({ error: "Username taken" });
 
         let salt = await bcrypt.genSalt();
         let passwordHash = await bcrypt.hash(password, salt);
@@ -36,7 +36,7 @@ export const listUser = async (req, res) => {
     try {
         let { name } = req.query || req.body;
         let list = await User.find({
-            name: { $regex: name || ""}
+            name: { $regex: name || "" }
         });
 
         for (let user of list) {
