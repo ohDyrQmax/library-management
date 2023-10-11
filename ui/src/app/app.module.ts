@@ -9,16 +9,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {BookService} from "./services/book.service";
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {NgOptimizedImage} from "@angular/common";
-import {BookCategoryComponent} from './components/book-category/book-category.component';
-import {SearchComponent} from './components/search/search.component';
+import {BookSearchComponent} from './components/book-search/book-search.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         BookListComponent,
         PageNotFoundComponent,
-        BookCategoryComponent,
-        SearchComponent
+        BookSearchComponent,
     ],
     imports: [
         BrowserModule,
