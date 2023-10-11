@@ -25,8 +25,10 @@ export class BookListComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.queryParams.subscribe(() => {
             this.listBookAuthors()
-            this.listBookCategories()
-            this.listBooks();
+                .then(() => this.listBookCategories())
+                .finally(() => this.listBooks());
+
+
 
         });
 
