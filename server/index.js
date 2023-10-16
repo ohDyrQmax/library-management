@@ -15,6 +15,7 @@ import bookRoutes from "./routes/book.js";
 import categoryRoutes from "./routes/category.js";
 import authorRoutes from "./routes/author.js";
 import authRoutes from "./routes/auth.js";
+import authRoles from "./routes/role.js";
 
 import Role from "./models/role.js";
 import Category from "./models/Category.js";
@@ -33,7 +34,7 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
@@ -58,7 +59,7 @@ app.use("/book", bookRoutes);
 app.use("/category", categoryRoutes);
 app.use("/author", authorRoutes);
 app.use("/user", userRoutes);
-
+app.use("/role", authRoles);
 app.use("/ticket", borrowTicketRoutes);
 
 /* mongoose setup */

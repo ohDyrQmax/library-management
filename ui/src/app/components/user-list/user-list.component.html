@@ -1,0 +1,95 @@
+<div *ngIf="!loading" class="bg-dark">
+  <div class="">
+    <table class="table table-dark table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Functions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of Users | keyvalue; index as i">
+        <th scope="col">{{i + 1}}</th>
+        <td>{{user.value.username}}</td>
+        <td>{{user.value.name}}</td>
+        <td>{{Roles[user.value.roleId].name}}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-success mx-2"
+                  data-bs-toggle="modal" data-bs-target="#update-user-Modal"
+                  (click)="setUpdateUser(user.value)"
+          >
+            Update <i class="fa-solid fa-pencil"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-danger"
+                  data-bs-toggle="modal" data-bs-target="#delete-user-Modal"
+                  (click)="setUpdateUser(user.value)"
+          >
+            Delete <i class="fa-solid fa-trash-can"></i>
+          </button>
+
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- Update Modal -->
+    <div class="modal fade text-white" id="update-user-Modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Updating '{{selectUser?.name}}'</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="form" novalidate autocomplete="off">
+              <label for="update-username">Username:</label>
+              <input class="form-control shadow-none  px-2" formControlName="username" id="update-username"
+                     value="{{selectUser?.username}}">
+
+              <label for="update-name">Name:</label>
+              <input class="form-control shadow-none  px-2" formControlName="name" id="update-name"
+                     [value]="selectUser?.name">
+
+              <label for="update-role">Role:</label>
+              <select class="form-select" id="update-role">
+                <option *ngFor="let role of Roles | keyvalue"
+                        [attr.selected]="role.key == selectUser?.roleId ? true : null"
+                        [value]="role.key"> {{role.value.name}}</option>
+              </select>
+            </form>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="submit" class="btn btn-outline-light float-end" (click)="updateUser(selectUser?._id)">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Modal-->
+    <div class="modal fade text-white" id="delete-user-Modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Delete '{{selectUser?.name}}'</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <button type="button" class="btn btn-outline-light float-end mx-2" data-bs-dismiss="modal" aria-label="Close">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-outline-danger float-end" (click)="deleteUser(selectUser?._id)">
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

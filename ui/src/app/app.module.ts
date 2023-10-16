@@ -3,13 +3,16 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {Book} from './common/book.component';
 import {BookListComponent} from './components/book-list/book-list.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BookService} from "./services/book.service";
+import {AuthService} from "./services/auth.service";
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {NgOptimizedImage} from "@angular/common";
 import {BookSearchComponent} from './components/book-search/book-search.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {UserListComponent} from './components/user-list/user-list.component';
+
 
 @NgModule({
     declarations: [
@@ -17,16 +20,19 @@ import {BookSearchComponent} from './components/book-search/book-search.componen
         BookListComponent,
         PageNotFoundComponent,
         BookSearchComponent,
+        UserListComponent,
     ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
+  imports: [
+    BrowserModule,
+    HttpClientModule,
 
-        NgOptimizedImage,
-        AppRoutingModule,
-    ],
+    NgOptimizedImage,
+    AppRoutingModule,
+    ReactiveFormsModule,
+  ],
     providers: [
-        BookService
+        BookService,
+        AuthService
     ],
     bootstrap: [AppComponent]
 })

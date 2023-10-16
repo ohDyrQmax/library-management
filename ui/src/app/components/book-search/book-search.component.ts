@@ -9,18 +9,21 @@ import {Author} from "../../common/author.component";
   styleUrls: ['./book-search.component.css']
 })
 export class BookSearchComponent implements OnInit{
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
+  ) {
     let title = this.activatedRoute.snapshot.queryParams['title'];
     let author = this.activatedRoute.snapshot.queryParams['author'];
     let category = this.activatedRoute.snapshot.queryParams['category'];
     sessionStorage.setItem('searchKeyword', title === "undefined" ? "" : title);
     sessionStorage.setItem('selectedAuthor', author === "undefined" ? "" : author);
     sessionStorage.setItem('selectedCategory', category === "undefined" ? "" : category);
+  }
+
+  ngOnInit() {
+
   }
 
   @Input() bookAuthors!: { [key: string]: Author };

@@ -1,3 +1,5 @@
+
+
 .geInToBtn {
   background-color: var(--bs-red);
   border-bottom-left-radius: 0;
@@ -21,4 +23,23 @@ footer input {
 
 .bg-dark-custom {
   background-color: black;
+}
+
+.bg-dark-custom-1 {
+  background-color: rgba(0, 0, 0, 0.38);
+  width: 200px;
+}
+
+#login-form input::placeholder {
+  font-size: .8rem;
+  color: var(--bs-gray-600);
+}
+
+.login-btn:hover {
+  color: black !important;
+}
+
+#login-popup-btn:hover, #logout-btn:hover{
+  background-color: var(--bs-red);
+  color: white !important;
 }

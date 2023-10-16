@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
+import keyBy from "lodash/keyBy.js";
 
 /* create */
 export const createUser = async (req, res) => {
@@ -43,7 +44,7 @@ export const listUser = async (req, res) => {
             user.password = undefined;
         }
 
-        res.status(200).json(list);
+        res.status(200).json(keyBy(list, '_id'));
     } catch (error) {
         res.status(error.status || 500).json({error: error.message || error});
     }
@@ -66,20 +67,16 @@ export const getUserDetailById = async (req, res) => {
 /* update */
 export const updateUser = async (req, res) => {
     try {
-        let { id } = req.params || req.query;
         let {
+            id,
             username,
-            password,
             roleId,
             name
         } = req.body;
 
         let user = await User.findById(id);
-        let salt = await bcrypt.genSalt();
-        let passwordHash = await bcrypt.hash(password, salt);
 
         user.username = username;
-        user.password = passwordHash;
         user.roleId = roleId;
         user.name = name;
 
@@ -95,7 +92,10 @@ export const updateUser = async (req, res) => {
 export const deleteUserById = async (req, res) => {
   try {
       let { id } = req.params || req.query;
-      let deletedUser = await User.findByIdAndDelete(id);
+      let deletedUser = await User.findById(id);
+      let deleteUserRole = await Role.findById(deletedUser.roleId);
+      if (deleteUserRole.priority > 2) return res.status(400).send("Cannot delete manager account.");
+      await User.findByIdAndDelete(id);
       return res.status(200).json({ message: `User ${deletedUser.username} deleted.` })
   }  catch (error) {
       return res.status(error.status || 500).json({error: error.message || error});

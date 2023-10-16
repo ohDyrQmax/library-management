@@ -1,3 +1,13 @@
+<!-- Header-->
+<header class="bg-dark py-5" style="background-color: var(--bs-red)">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white" >
+      <h1 class="display-4 fw-bolder" style="color: var(--bs-red)">Random template text</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Even more random template text</p>
+    </div>
+  </div>
+</header>
+
 <div class="row px-lg-5 bg-dark-custom" style="
 margin-right: 0;
 ">
@@ -17,12 +27,38 @@ margin-right: 0;
               <a>By <i>{{Authors[book.value.authorId]["name"]}}</i></a><br>
               <a>Category: {{Categories[book.value.categoryId]["name"]}}</a><br>
               <a>Quantity: {{book.value.quantity}}</a>
-              <button class="btn btn-outline-light float-end">
-                Borrow
-              </button>
+
+              <a class="btn btn-outline-light float-end"
+                      data-bs-toggle="modal" data-bs-target="#borrow-Modal"
+                 [ngStyle]="!isLoggedIn() ? {pointerEvent: 'none'} : {pointerEvent: 'none'}"
+              >
+                {{isLoggedIn() ? 'Borrow' : 'Login to borrow'}}
+              </a>
+
+              <!-- Modal -->
+              <div class="modal fade" id="borrow-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content bg-dark">
+                    <div class="modal-header border-0">
+                      <h5 class="modal-title" >Borrowing '{{book.value.title}}'</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <label for="return-date">Expected return date:</label>
+                        <input class=" shadow-none  px-2" id="return-date" type="date" [min]="getToday()">
+                      </form>
+                    </div>
+                    <div class="modal-footer border-0">
+                      <button type="button" class="btn btn-outline-light float-end" (click)="createTicket(book.key)">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
-
-
           </div>
         </div>
       </div>
