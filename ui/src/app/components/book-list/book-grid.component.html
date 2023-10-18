@@ -27,37 +27,56 @@ margin-right: 0;
               <a>By <i>{{Authors[book.value.authorId]["name"]}}</i></a><br>
               <a>Category: {{Categories[book.value.categoryId]["name"]}}</a><br>
               <a>Quantity: {{book.value.quantity}}</a>
-
               <a class="btn btn-outline-light float-end"
                       data-bs-toggle="modal" data-bs-target="#borrow-Modal"
                  [ngStyle]="!isLoggedIn() ? {pointerEvent: 'none'} : {pointerEvent: 'none'}"
+                 (click)="setSelectedBook(book.value)"
               >
                 {{isLoggedIn() ? 'Borrow' : 'Login to borrow'}}
               </a>
+            </div>
+          </div>
+        </div>
 
-              <!-- Modal -->
-              <div class="modal fade" id="borrow-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-dark">
-                    <div class="modal-header border-0">
-                      <h5 class="modal-title" >Borrowing '{{book.value.title}}'</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <label for="return-date">Expected return date:</label>
-                        <input class=" shadow-none  px-2" id="return-date" type="date" [min]="getToday()">
-                      </form>
-                    </div>
-                    <div class="modal-footer border-0">
-                      <button type="button" class="btn btn-outline-light float-end" (click)="createTicket(book.key)">
-                        Save changes
-                      </button>
-                    </div>
-                  </div>
-                </div>
+        <!-- Modal -->
+        <div class="text-white modal fade" id="borrow-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+              <div class="modal-header border-0">
+                <h5 class="modal-title" >Borrowing '{{selectedBook?.title}}'</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-
+              <div class="modal-body">
+                <form>
+                  <div class="mb-2">
+                    <label for="borrow-date">Borrow date:</label>
+                    <input
+                            class="form-control text-white bg-dark border border-1 rounded-2 shadow-none px-2"
+                            onClick="this.showPicker()"
+                            id="borrow-date"
+                            type="date"
+                            [min]="getToday()"
+                            [value]="getToday()"
+                    >
+                  </div>
+                  <div>
+                    <label for="return-date">Expected return date:</label>
+                    <input
+                            class="form-control text-white bg-dark border border-1 rounded-2 shadow-none px-2"
+                            onClick="this.showPicker()"
+                            id="return-date"
+                            type="date"
+                            [min]="getToday()"
+                            [value]="getToday()"
+                    >
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-light float-end" (click)="createTicket(selectedBook)">
+                  Borrow
+                </button>
+              </div>
             </div>
           </div>
         </div>

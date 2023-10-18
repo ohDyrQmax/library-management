@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Category} from "../../common/category.component";
-import {Author} from "../../common/author.component";
+import {Category} from "../../common/common.component";
+import {Author} from "../../common/common.component";
 
 @Component({
     selector: 'app-book-search',

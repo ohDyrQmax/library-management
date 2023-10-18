@@ -24,3 +24,15 @@
 .card-body {
   font-size: .95rem;
 }
+
+input::-webkit-datetime-edit-day-field:focus,
+input::-webkit-datetime-edit-month-field:focus,
+input::-webkit-datetime-edit-year-field:focus {
+  background-color: initial;
+  color: white;
+  outline: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

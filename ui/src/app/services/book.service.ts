@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {first, firstValueFrom, map, Observable} from "rxjs";
-import {Book} from "../common/book.component";
-import {Category} from "../common/category.component";
-import {Author} from "../common/author.component";
+import {firstValueFrom, map, Observable} from "rxjs";
+import {Book} from "../common/common.component";
+import {Category} from "../common/common.component";
+import {Author} from "../common/common.component";
 import {BaseService} from "./base.service";
 
 @Injectable({
@@ -32,10 +32,9 @@ export class BookService extends BaseService{
     // getAuthors = (): Observable<{ [key: string]: Author }> => this.httpClient.get<any>(this.authorUrl)
     //     .pipe(map(response => response));
 
-    borrowBook(bookId: string): Observable<any> {
-      let currentUser = JSON.parse(localStorage.getItem("user"));
-      let userId = currentUser._id;
-      return this.httpClient.post(this.ticketUrl, {bookId: bookId, borrowerId: userId}, {'headers': this.createAuthorizationHeader()})
+    borrowBook(data: any): Observable<any> {
+
+      return this.httpClient.post(this.ticketUrl, data, {'headers': this.createAuthorizationHeader()})
         .pipe(map(response => response));
     }
 }

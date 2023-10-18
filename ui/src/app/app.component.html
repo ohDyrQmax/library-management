@@ -23,6 +23,7 @@
 <!--                    </ul>-->
 <!--                </li>-->
                 <li *ngIf="isLoggedIn() && isStaff()" class="nav-item"><a class="nav-link" [routerLink]="'/users'">Users</a></li>
+                <li *ngIf="isLoggedIn()" class="nav-item"><a class="nav-link" [routerLink]="'/tickets'">Borrow history</a></li>
             </ul>
             <!--      <li *ngIf="isLoggedIn" class="text-white">{{name}}</li>-->
             <div class=" dropstart">

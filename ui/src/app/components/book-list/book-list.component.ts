@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Book} from "../../common/book.component";
+import {Book} from "../../common/common.component";
 import {BookService} from "../../services/book.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Category} from "../../common/category.component";
-import {Author} from "../../common/author.component";
+import {Category} from "../../common/common.component";
+import {Author} from "../../common/common.component";
 import * as moment from "moment";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {now} from "moment";
@@ -19,7 +19,7 @@ export class BookListComponent implements OnInit {
   Authors: { [key: string]: Author };
   Categories: { [key: string]: Category };
   form: FormGroup;
-
+  selectedBook: Book;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -72,22 +72,39 @@ export class BookListComponent implements OnInit {
       console.log("Error fetching authors:", e);
     }
   }
-  createTicket(bookId: string): void {
-    if (!this.isLoggedIn()) {
-      alert("You can only borrow book after logging in an existing account.");
+
+  setSelectedBook(book: Book) {
+    this.selectedBook = book;
+  }
+
+  createTicket(book: Book): void {
+    if(!this.isLoggedIn()) {
+      alert("You must be logged in with an existing account");
       return;
     }
-    this.bookService.borrowBook(bookId).subscribe(({
+    let currentUser = JSON.parse(localStorage.getItem("user"));
+    let borrowDate = (document.getElementById("borrow-date") as HTMLInputElement).value;
+    let ReturnDate = (document.getElementById("return-date") as HTMLInputElement).value;
+    let data = {
+      book: book,
+      borrower: currentUser,
+      borrowedDate: borrowDate,
+      expectReturnDate: ReturnDate
+    }
+
+    this.bookService.borrowBook(data).subscribe(({
       next: data => {
         alert("Successfully create ticket.");
         this.router.navigateByUrl("/books")
           .then(r => window.location.reload())
       },
       error: err => {
-        alert(`Error creating ticket: ${err.error.error || err.error.message}`);
+        alert(`${err.error.error || err.error.message}`);
+        window.location.reload();
       }
     }));
   }
+
   protected readonly now = now;
   protected readonly moment = moment;
 }

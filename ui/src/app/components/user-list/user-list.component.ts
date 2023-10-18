@@ -1,8 +1,8 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
-import {User} from "../../common/user.component";
-import {Role} from "../../common/role.component";
+import {User} from "../../common/common.component";
+import {Role} from "../../common/common.component";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 
@@ -88,10 +88,13 @@ export class UserListComponent implements OnInit {
   deleteUser(id: string) {
     this.userService.deleteUser(id).subscribe({
       next: (data: any) => {
-        this.router.navigateByUrl("/users");
+        alert(`Remove ${this.Users[id].name} successfully from the system.`)
         window.location.reload();
       },
-      error: (err) => alert(err)
+      error: (err) => {
+        alert(err.error);
+        window.location.reload();
+      }
     })
   }
 

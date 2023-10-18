@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import keyBy from "lodash/keyBy.js";
+import Role from "../models/role.js";
 
 /* create */
 export const createUser = async (req, res) => {

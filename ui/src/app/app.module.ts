@@ -12,6 +12,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {BookSearchComponent} from './components/book-search/book-search.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {UserListComponent} from './components/user-list/user-list.component';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {UserListComponent} from './components/user-list/user-list.component';
         PageNotFoundComponent,
         BookSearchComponent,
         UserListComponent,
+        TicketListComponent,
     ],
   imports: [
     BrowserModule,

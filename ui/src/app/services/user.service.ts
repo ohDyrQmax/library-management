@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {first, firstValueFrom, map, Observable} from "rxjs";
+import {firstValueFrom, Observable} from "rxjs";
 import {BaseService} from "./base.service";
 
 @Injectable({
