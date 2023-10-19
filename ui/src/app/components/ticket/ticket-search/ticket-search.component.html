@@ -1,0 +1,32 @@
+<div class="">
+  <label for="filter-ticket-borrower" class="text-white">Borrower:</label>
+  <div class="pb-2 mb-2 border-bottom border-dark input-group">
+    <input
+      placeholder="Search by borrower name"
+      type="text"
+      class="text-white form-control shadow-none bg-dark-custom px-2"
+      id="filter-ticket-borrower"
+      aria-describedby="search-with-filter"
+      name="searchTicketBorrower"
+      (input)="changeFilterValue($event)"
+    >
+
+  </div>
+
+  <label for="filter-book-title" class="text-white">Book:</label>
+  <div class="pb-2 mb-2 border-bottom border-dark input-group">
+    <input
+      placeholder="Search by book title"
+      type="text"
+      class="text-white form-control shadow-none bg-dark-custom px-2"
+      id="filter-book-title"
+      aria-describedby="search-with-filter"
+      name="searchTicketBook"
+      (input)="changeFilterValue($event)"
+    >
+  </div>
+
+  <button class="text-white btn btn-outline-light" type="button" id="search-with-filter" (click)="searchTicket()">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+</div>

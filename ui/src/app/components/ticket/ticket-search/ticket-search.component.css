@@ -1,0 +1,40 @@
+.bg-dark-custom {
+  background-color: black;
+}
+
+span{
+  font-size: .8rem;
+}
+
+#search-with-filter:hover > i {
+  transition: .5s ease;
+  color: black
+}
+
+#filter-book-title::placeholder, #filter-ticket-borrower::placeholder {
+  font-size: .8rem;
+  color: var(--bs-gray-600);
+}
+
+.list-group {
+  max-height: 150px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bs-gray-800);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-gray-700);
+}

@@ -1,23 +1,5 @@
 import Book from "../models/Book.js";
-import Author from "../models/Author.js";
-import Category from "../models/Category.js";
 import keyBy from "lodash/keyBy.js";
-
-
-/* utility */
-const addNewAuthor = async (name) => {
-    let existed = await Author.findOne({ name: name });
-    if (existed) return existed;
-    let newAuthor = new Author({ name: name });
-    return await newAuthor.save();
-};
-
-const addNewCategory = async (name) => {
-    let existed = await Category.findOne({ name: name });
-    if (existed) return existed;
-    let newCategory = new Category({ name: name });
-    return await newCategory.save();
-};
 
 /* create */
 export const createBook = async (req, res) => {
@@ -56,7 +38,7 @@ export const createBook = async (req, res) => {
         let addedBook = await newBook.save();
         return res.status(200).json(addedBook);
     } catch (error) {
-        return res.status(error.status || 500).json({ error: error.message || error });
+        return res.status(error.status || 500).json({ error: error.error || error });
     }
 }
 
@@ -73,7 +55,7 @@ export const listBook = async (req, res) => {
         //.skip((item_per_page * current_page_no)-item_per_page)).limit(item_per_page)
         return res.status(200).json(keyBy(list, "_id"));
     } catch (error) {
-        return res.status(error.status || 500).json({ error: error.message || error });
+        return res.status(error.status || 500).json({ error: error.error || error });
     }
 };
 
@@ -86,7 +68,7 @@ export const findBookById = async (req, res) => {
 
         return res.status(200).json(book);
     } catch (error) {
-        return res.status(error.status || 500).json({ error: error.message || error });
+        return res.status(error.status || 500).json({ error: error.error || error });
     }
 };
 
@@ -105,7 +87,7 @@ export const updateBookById = async (req, res) => {
         let updatedBook = await book.save();
         res.status(200).json(updatedBook)
     } catch (error) {
-        res.status(error.status || 500).json({ error: error.message || error });
+        res.status(error.status || 500).json({ error: error.error || error });
     }
 };
 
@@ -116,6 +98,6 @@ export const deleteBookById = async (req, res) => {
       await Book.findByIdAndDelete(id);
       return res.status(204);
   } catch (error) {
-      res.status(error.status || 500).json({ error: error.message || error });
+      res.status(error.status || 500).json({ error: error.error || error });
   }
 };

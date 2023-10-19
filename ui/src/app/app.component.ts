@@ -1,6 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import * as moment from "moment";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "./services/auth.service";
 
@@ -16,7 +14,6 @@ export class AppComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
   ) {
     this.form = this.fb.group({
       username: ['', Validators.required],
@@ -25,7 +22,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.isLoggedIn())
     // localStorage.removeItem("user");
     // localStorage.removeItem("token");
     // localStorage.removeItem("expires_at");
@@ -42,7 +38,7 @@ export class AppComponent implements OnInit {
             document.getElementById("login-form").classList.remove("show");
             window.location.reload();
           },
-          error: (err) => this.errorMessage = err.error.message || err
+          error: (err) => this.errorMessage = err.error.message || err.error.error
         });
     }
   }

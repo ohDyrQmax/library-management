@@ -17,7 +17,7 @@ export const userLogin = async (req, res) => {
         let role = await Role.findOne({ _id: user.roleId });
 
         let isMatchPassword = await bcrypt.compare(password, user.password);
-        if (!isMatchPassword) return res.status(400).json({ message: "Invalid credentials." });
+        if (!isMatchPassword) return res.status(400).json({ error: "Invalid credentials." });
 
         user.password = undefined;
 
@@ -29,12 +29,7 @@ export const userLogin = async (req, res) => {
 
         res.status(200).json({ user, priority: role.priority, token, expiredAt: thirtyMinuteInSec });
     } catch (error) {
-        res.status(error.status || 500).json({ error: error.message || error });
+        res.status(error.status || 500).json({ error: error.error || error });
     }
 }
-
-
-export const userLogout = async (req, res) => {
-
-};
 

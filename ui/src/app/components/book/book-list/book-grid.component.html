@@ -24,7 +24,7 @@ margin-right: 0;
 
             <div class="card-body text-white book-body p-2">
               <h4 class="fw-bolder">{{book.value.title}}</h4>
-              <a>By <i>{{Authors[book.value.authorId]["name"]}}</i></a><br>
+              <a>By <i>{{Authors[book.value.authorId].name}}</i></a><br>
               <a>Category: {{Categories[book.value.categoryId]["name"]}}</a><br>
               <a>Quantity: {{book.value.quantity}}</a>
               <a class="btn btn-outline-light float-end"

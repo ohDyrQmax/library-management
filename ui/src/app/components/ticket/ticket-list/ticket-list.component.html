@@ -1,0 +1,30 @@
+<div class="row px-lg-5 bg-dark-custom"
+     style="margin-right: 0;">
+  <section class="py-3 col-md-3" *ngIf="isStaff()">
+    <app-ticket-search></app-ticket-search>
+  </section>
+  <section class="py-3 col-md-9">
+    <div class="container px-4 px-lg-2">
+      <div class="row gx-4 gx-lg-5  justify-content-center ">
+        <div class=" mb-3" *ngFor="let ticket of Tickets | keyvalue">
+          <div class="card bg-dark-custom border border-dark h-100">
+            <!-- <img class="card-img-top img-responsive" src="{{book.imageUrl}}" alt="..." height="250" width="100"/>-->
+            <div class="card-body text-white book-body p-2">
+              <h4 class="fw-bolder">ID: {{ticket.key}}</h4>
+              <a><span>Borrower: </span> {{ticket.value.borrower.name}} - {{ticket.value.borrower.username}}</a><br>
+              <a><span>Borrowed Book: </span> {{ticket.value.book._id}} - {{ticket.value.book.title}}</a><br>
+              <a><span>Borrowed Date: </span> {{ticket.value.borrowedDate}}</a><br>
+              <a><span>Expected Return Date: </span> {{ticket.value.expectReturnDate}}</a><br>
+              <a><span>Return Date: </span> {{ticket.value.returnDate || ""}}</a>
+              <button class="btn btn-outline-light float-end"
+                (click)="returnBook(ticket.key)"
+              >
+                Confirm return book
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

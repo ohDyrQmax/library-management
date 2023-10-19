@@ -13,8 +13,8 @@ export const createUser = async (req, res) => {
             name
         } = req.body;
 
-        let user = await User.findOne({ username: username });
-        if (user) return res.status(409).json({ error: "Username taken" });
+        // let user = await User.findOne({ username: username });
+        // if (user) return res.status(409).json({ error: "Username taken" });
 
         let salt = await bcrypt.genSalt();
         let passwordHash = await bcrypt.hash(password, salt);
@@ -29,7 +29,7 @@ export const createUser = async (req, res) => {
         let savedNewUser = await newUser.save();
         return res.status(201).json(savedNewUser);
     } catch (error) {
-        return res.status(error.status || 500).json({error: error.message || error});
+        return res.status(error.status || 500).json({error: error.error || error});
     }
 };
 
@@ -47,7 +47,7 @@ export const listUser = async (req, res) => {
 
         res.status(200).json(keyBy(list, '_id'));
     } catch (error) {
-        res.status(error.status || 500).json({error: error.message || error});
+        res.status(error.status || 500).json({error: error.error || error});
     }
 };
 export const getUserDetailById = async (req, res) => {
@@ -61,7 +61,7 @@ export const getUserDetailById = async (req, res) => {
 
         res.status(200).json(user);
     } catch (error) {
-        res.status(error.status || 500).json({error: error.message || error});
+        res.status(error.status || 500).json({error: error.error || error});
     }
 };
 

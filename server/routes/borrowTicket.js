@@ -11,8 +11,8 @@ import {
 const router = express.Router();
 
 router.post("/", verifyToken, createBorrowTicket);
-router.get("/", verifyToken, getTicketList);
-router.get("/:id", verifyToken, getTicketByUserId);
-router.patch("/:id",verifyToken, verifyAuthorizationStaff, updateTicketReturnDateById);
+router.get("/", verifyToken, verifyAuthorizationStaff, getTicketList);
+router.get("/id", verifyToken, getTicketByUserId);
+router.patch("/:id",verifyToken, updateTicketReturnDateById);
 
 export default router;

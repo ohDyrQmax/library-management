@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Book} from "../../common/common.component";
-import {BookService} from "../../services/book.service";
+import {Book} from "../../../common/common.component";
+import {BookService} from "../../../services/book.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Category} from "../../common/common.component";
-import {Author} from "../../common/common.component";
+import {Category} from "../../../common/common.component";
+import {Author} from "../../../common/common.component";
 import * as moment from "moment";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {now} from "moment";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../../services/auth.service";
+import {TicketService} from "../../../services/ticket.service";
 
 @Component({
   selector: 'app-book-list',
@@ -24,8 +25,9 @@ export class BookListComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private bookService: BookService,
+    private ticketService: TicketService,
     private authService: AuthService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     this.form = this.fb.group({
       borrowedDate: ['', Validators.required],
@@ -82,24 +84,23 @@ export class BookListComponent implements OnInit {
       alert("You must be logged in with an existing account");
       return;
     }
-    let currentUser = JSON.parse(localStorage.getItem("user"));
+
     let borrowDate = (document.getElementById("borrow-date") as HTMLInputElement).value;
     let ReturnDate = (document.getElementById("return-date") as HTMLInputElement).value;
     let data = {
       book: book,
-      borrower: currentUser,
       borrowedDate: borrowDate,
       expectReturnDate: ReturnDate
     }
 
-    this.bookService.borrowBook(data).subscribe(({
+    this.ticketService.borrowBook(data).subscribe(({
       next: data => {
         alert("Successfully create ticket.");
         this.router.navigateByUrl("/books")
           .then(r => window.location.reload())
       },
       error: err => {
-        alert(`${err.error.error || err.error.message}`);
+        alert(err.error.message || err.error.error);
         window.location.reload();
       }
     }));

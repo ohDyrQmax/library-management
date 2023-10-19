@@ -20,14 +20,14 @@ const BorrowerSchema = new mongoose.Schema(
             min: 3,
             max: 50
         },
-        refreshToken: String
-    }, { timestamps: true }
+    }
 );
 
 const BorrowTicketSchema = new mongoose.Schema(
     {
-        book: {type: mongoose.Schema.Types.ObjectId, ref: "Book"},
-        borrower: BorrowerSchema,
+        book: {type: mongoose.Schema.Types.ObjectId, ref: "Book", unique: false},
+        // borrower: {type: mongoose.Schema.Types.ObjectId, ref: "User", unique: false},
+        borrower: {type:BorrowerSchema, unique: false},
         borrowedDate: String,
         expectReturnDate: String,
         returnDate: String,

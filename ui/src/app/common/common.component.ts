@@ -31,8 +31,9 @@ export interface User {
 
 export interface Ticket {
     _id: string,
-    bookId: string,
-    borrowerId: string,
-    borrowDate: string,
-    expectedReturnDate: string
+    book: Book,
+    borrower: User,
+    borrowedDate: string,
+    expectReturnDate: string,
+    returnDate: string
 }
